@@ -12,9 +12,9 @@ import (
 )
 
 type User struct {
+        Username         string
         Uid              string
         Gid              string
-        Username         string
         Groupname        string
         Homedir          string
         Shell            string
