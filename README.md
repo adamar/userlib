@@ -1,7 +1,7 @@
 
 # User library
 
-Create users without shelling out to `useradd`
+Create linux system users without shelling out to `useradd`
 
 
 ## Quick start
@@ -42,7 +42,7 @@ func main() {
 | `Groupname` | The name of the users main group | `string` | - | no |
 | `Homedir` | The path to the users home directory | `string` | - | no |
 | `Shell` | The shell assigned to the user | `string` | `/sbin/nologin` | no |
-| `GroupMemberships` | The extra groupsn delegated to the user | `list(string)`| - | no |
+| `GroupMemberships` | The extra groups delegated to the user | `list(string)`| - | no |
 
 
 

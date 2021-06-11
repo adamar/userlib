@@ -11,6 +11,7 @@ import (
         "strconv"
 )
 
+// The User definition
 type User struct {
         Username         string
         Uid              string
@@ -21,7 +22,7 @@ type User struct {
         GroupMemberships []string
 }
 
-
+// Exported function for creating new users
 func (u *User) AddUser() error {
 
         err := u.PreFlightChecks()
@@ -60,6 +61,7 @@ func (u *User) AddUser() error {
 
 }
 
+// Create the users home directory
 func (u *User) makeHomeDir() error {
 
         if _, err := os.Stat(u.Homedir); os.IsNotExist(err) {
@@ -73,6 +75,7 @@ func (u *User) makeHomeDir() error {
 
 }
 
+// Append user to extra groups to grant user additional group memberships
 func (u *User) addAdditionalGroups() error {
         input, err := ioutil.ReadFile("/etc/group")
         if err != nil {
@@ -109,6 +112,7 @@ func (u *User) addAdditionalGroups() error {
         return nil
 }
 
+// Append a line to important files
 func appendFile(filename string, line string) error {
 
         f, err := os.OpenFile(filename, os.O_APPEND|os.O_WRONLY, 0644)
@@ -124,18 +128,21 @@ func appendFile(filename string, line string) error {
 
 }
 
+// Build up a /etc/passwd file line
 func (u *User) passwdLine() string {
 
         return fmt.Sprintf("%s:%s:%s:%s:%s:%s:%s", u.Username, u.Groupname, u.Uid, u.Gid, "", u.Homedir, u.Shell)
 
 }
 
+// Build up a /etc/group file line
 func (u *User) groupLine() string {
 
         return fmt.Sprintf("%s:%s:%s:%s", u.Groupname, "x", u.Gid, "")
 
 }
 
+// Perform a number of sanity checks before beginning
 func (u *User) PreFlightChecks() error {
 
         // Check if a username has been set, this is the only required field
@@ -214,6 +221,7 @@ func (u *User) PreFlightChecks() error {
 
 }
 
+// Walk the home diretory of the user setting the corretc ownership
 func (u *User) recursiveChownHome() error {
         return filepath.Walk(u.Homedir, func(name string, info os.FileInfo, err error) error {
                 if err == nil {
