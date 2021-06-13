@@ -11,7 +11,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/adamar/user"
+	"github.com/adamar/userlib"
 	)
 
 
