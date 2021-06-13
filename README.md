@@ -19,7 +19,7 @@ func main() {
 
 
 	// Set some basic attributes for the new user
-	u := &User{Username: "john", GroupMemberships: []string{"games"}, Shell: "/bin/bash"}
+	u := &userlib.User{Username: "john", GroupMemberships: []string{"games"}, Shell: "/bin/bash"}
 
 	// Create the user
 	u.AddUser()
